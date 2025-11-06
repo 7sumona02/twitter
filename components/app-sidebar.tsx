@@ -60,7 +60,7 @@ const items = [
 
 export function AppSidebar() {
   return (
-    <Sidebar className="w-[350px]">
+    <Sidebar className="w-[23vw]">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="pb-3">Twitter</SidebarGroupLabel>

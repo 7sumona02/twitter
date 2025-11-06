@@ -17,7 +17,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 
 const RightSidebar = () => {
     return (
-        <div className='w-[350px] h-screen fixed right-0 p-3 border-l'>
+        <div className='w-[25vw] h-screen fixed right-0 p-3 border-l'>
             <div className="w-full">
                 <InputGroup>
                     <InputGroupInput placeholder="Search" />
