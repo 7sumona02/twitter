@@ -22,6 +22,7 @@ const Posts = () => {
                     <EllipsisIcon size={20} className="text-neutral-500" />
                 </div>
             </div>
+            <div>Those who can't abandon anything, can't change anything.</div>
             <div>
                 <div className='w-full h-[50vh] rounded-md overflow-hidden relative'>
                 <img src="https://github.com/shadcn.png" className='w-full h-full object-cover' />

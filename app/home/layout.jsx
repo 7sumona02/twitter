@@ -9,7 +9,7 @@ export default function Layout({ children }) {
                 <AppSidebar />
                 <SidebarTrigger />
                 {children}
-                <RightSidebar />
+                <div className="md:block hidden"><RightSidebar /></div>
             </SidebarProvider>
         </>
     )

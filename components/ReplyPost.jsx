@@ -30,7 +30,7 @@ const ReplyPost = () => {
         setReply(post + emojiObject.emoji)
     }
     return (
-        <div className="flex flex-col justify-start mt-5 border-b pb-5 w-[55.4vw] pl-20 pr-5 space-y-5">
+        <div className="flex flex-col justify-start mt-5 border-b pb-5 md:w-[55.4vw] w-full md:pl-20 pr-5 space-y-5">
             <div className="w-full flex gap-1 ">
                 <div>
                     <Avatar className='size-10'>

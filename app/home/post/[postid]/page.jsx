@@ -2,15 +2,16 @@ import Back from '../../../../components/Back'
 import { Bookmark, ChartNoAxesColumnIncreasing, EllipsisIcon, Heart, MessageCircle, Repeat } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import ReplyPost from '../../../../components/ReplyPost'
+import Comments from '../../../../components/Comments'
 
 const page = () => {
   return (
-    <div className='w-[55.4vw]'>
-        <div className='flex justify-between items-center py-3 border-b pl-15 pr-5'>
+    <div className='md:w-[55.4vw] w-full pb-40'>
+        <div className='flex justify-between items-center py-3 border-b md:pl-15 pr-5'>
             <Back />            
             <div className='text-neutral-500'>Reply</div>
         </div>
-        <div className='pl-15 pr-5 border-b'>
+        <div className='md:pl-15 pr-5 border-b'>
             <div className="flex items-start justify-start gap-3 py-5">
                 <div>
                     <Avatar className='size-10'>
@@ -30,6 +31,7 @@ const page = () => {
                         <EllipsisIcon size={20} className="text-neutral-500" />
                     </div>
                 </div>
+                <div>Those who can't abandon anything, can't change anything.</div>
                 <div>
                     <div className='w-full h-[50vh] rounded-md overflow-hidden relative'>
                     <img src="https://github.com/shadcn.png" className='w-full h-full object-cover' />
@@ -47,6 +49,10 @@ const page = () => {
         </div>
         <div>
             <ReplyPost />
+        </div>
+        <div>
+            <Comments />
+            <Comments />
         </div>
     </div>
   )
