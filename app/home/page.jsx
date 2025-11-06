@@ -1,6 +1,7 @@
 'use client'
 
 import CreatePost from "../../components/CreatePost"
+import Posts from "../../components/Posts"
 
 const page = () => {
   return (
@@ -11,6 +12,7 @@ const page = () => {
         </div>
        <div className="w-full">
          <CreatePost />
+         <Posts />
        </div>
     </div>
   )
