@@ -6,10 +6,12 @@ import Link from 'next/link'
 import { signUpUser } from '../../../services/auth'
 import { useState } from 'react'
 import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 
 const page = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const router = useRouter()
 
     const signup = async(e) => {
         e.preventDefault()
@@ -24,6 +26,10 @@ const page = () => {
             toast.error(error.message)
             return
         }
+        toast.success('Check your email to verify your account')
+        setTimeout(() => {
+            router.replace('/auth/callback')
+        }, 2000)
     }
   return (
     <div className='min-h-screen w-screen flex justify-center items-center'>
