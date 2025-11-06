@@ -12,6 +12,7 @@ const page = () => {
     const [image, setImage] = useState(null)
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
+    const [user, setUser] = useState(null)
 
     useEffect(() => {
         //check if registered
@@ -22,6 +23,8 @@ const page = () => {
             router.replace('/auth/signup')
             return
            }
+
+           setUser(user)
 
            //check if already has profile
            const {data:profile, error:profileError} = await supabase.from('profiles').select('*').eq('id',user.id).maybeSingle()
@@ -43,7 +46,35 @@ const page = () => {
             toast.error('Please fill in all fields')
             return
         }
+        //avatar upload
+        const imagePath = `${image.name}-${Date.now()}`
+        const {err:imgError} = await supabase.storage.from('avatars').upload(imagePath, image)
+        if(imgError){
+            toast.error(imgError.message)
+            return
+        }
+
+        //generate avatar url
+        const {data:{publicUrl}} = supabase.storage.from('avatars').getPublicUrl(imagePath)
+
+        //insert avatar url to profiles table
+        const {error:insertError} = await supabase.from('profiles').insert({
+            username,
+            email: user.email,
+            avatar_url: publicUrl,
+            id: user.id,
+            name,
+        })
+        if(insertError){
+            toast.error(error.message)
+            return
+        }
+        toast.success('Profile completed!')
+        setTimeout(() => {
+            router.replace('/')
+        }, 2000)
     }
+
   return (
     <div className='min-h-screen w-screen flex justify-center items-center'>
       <div className='md:w-sm w-xs space-y-5'>
