@@ -48,7 +48,7 @@ const page = () => {
         }
         //avatar upload
         const imagePath = `${image.name}-${Date.now()}`
-        const {err:imgError} = await supabase.storage.from('avatars').upload(imagePath, image)
+        const { error: imgError } = await supabase.storage.from('avatars').upload(imagePath, image)
         if(imgError){
             toast.error(imgError.message)
             return
@@ -66,7 +66,7 @@ const page = () => {
             name,
         })
         if(insertError){
-            toast.error(error.message)
+            toast.error(insertError.message)
             return
         }
         toast.success('Profile completed!')
