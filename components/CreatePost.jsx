@@ -9,10 +9,9 @@ import { useRef, useState } from 'react'
 
 const CreatePost = () => {
     const [post, setPost] = useState('')
-    const isDisabled = post.trim() === ""
-    const fileRef = useRef(null)
-
     const [imagePreview, setImagePreview] = useState(null)
+    const isDisabled = post.trim() === "" && !imagePreview
+    const fileRef = useRef(null)
 
     const handleImageClick = () => {
         fileRef.current?.click()
