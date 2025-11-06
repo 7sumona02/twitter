@@ -10,7 +10,7 @@ const Posts = () => {
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
             </div>
-            <div className="space-y-2 w-[50vw]">
+            <div className="space-y-2 w-full">
                 <div className="w-full flex justify-between items-center">
                 <div className="flex gap-1 items-end">
                     <div>Sumona</div>
