@@ -3,6 +3,7 @@ import { Bookmark, ChartNoAxesColumnIncreasing, EllipsisIcon, Heart, MessageCirc
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { useGetTweets } from "../custom-hooks/useTweet"
 import Link from "next/link"
+import moment from "moment"
 
 const Posts = () => {
     const {isLoading,isError,error,data:tweets} = useGetTweets()
@@ -21,11 +22,11 @@ const Posts = () => {
             </div>
             <div className="space-y-2 w-full">
                 <div className="w-full flex justify-between items-center">
-                <div className="flex gap-1 items-end">
+                <div className="flex gap-1 items-center">
                     <div>{tweet.profiles.name}</div>
                     <div className="text-sm text-neutral-500">@{tweet.profiles.username}</div>
                     <div className="text-neutral-500">•</div>
-                    <div className="text-sm text-neutral-500">{new Date(tweet.created_at).toLocaleString()}</div>
+                    <div className="text-sm text-neutral-500">{moment(tweet.created_at).fromNow()}</div>
                 </div>
                 <div>
                     <EllipsisIcon size={20} className="text-neutral-500" />
