@@ -5,10 +5,12 @@ import { Input } from '@/components/ui/input'
 import Link from 'next/link'
 import { useState } from 'react'
 import { signInUser } from '@/services/auth'
+import { useRouter } from 'next/navigation'
 
 const page = () => {
   const [email, setEmail] = useState('')
       const [password, setPassword] = useState('')
+      const router = useRouter()
 
       const signIn = async (e) => {
         e.preventDefault()
@@ -22,6 +24,9 @@ const page = () => {
           return
         }
         toast.success('Welcome back!')
+        setTimeout(() => {
+          router.replace('/auth/callback')
+        },2000)
       }
   return (
     <div className='min-h-screen w-screen flex justify-center items-center'>

@@ -10,7 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { Button } from "./ui/button"
+import LogoutButton from "@/components/LogoutButton"
 import Profile from "@/components/Profile"
 
 // Menu items.
@@ -75,7 +75,7 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
-              <Button className="mt-5">Post</Button>
+              <LogoutButton />
               <Profile />
             </SidebarMenu>
           </SidebarGroupContent>

@@ -1,12 +1,14 @@
 'use client'
 
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
+import { Avatar, AvatarImage } from './ui/avatar'
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from '@/components/ui/button'
 import { Calendar, ImageIcon, MapPin, SmileIcon, X } from 'lucide-react'
 import { useRef, useState } from 'react'
 import EmojiPicker, { Theme } from 'emoji-picker-react'
+import {useGetUser} from '@/custom-hooks/useGetUser'
+import { Skeleton } from "@/components/ui/skeleton"
 
 const CreatePost = () => {
     const [post, setPost] = useState('')
@@ -14,6 +16,7 @@ const CreatePost = () => {
     const [showPicker, setShowPicker] = useState(false)
     const isDisabled = post.trim() === "" && !imagePreview
     const fileRef = useRef(null)
+    const {loading, session, profile} = useGetUser()
 
     const handleImageClick = () => {
         fileRef.current?.click()
@@ -29,13 +32,23 @@ const CreatePost = () => {
     const onEmojiClick = (emojiObject) => {
         setPost(post + emojiObject.emoji)
     }
+
+    if (!session) return null
+    if (loading) return (
+    <div className="flex flex-col space-y-3">
+      <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-[250px]" />
+        <Skeleton className="h-4 w-[200px]" />
+      </div>
+    </div>
+  )
     return (
         <div className="flex flex-col justify-start mt-5 border-b pb-5 w-[55.4vw] pl-20 pr-5 space-y-5">
             <div className="w-full flex gap-1 ">
                 <div>
-                    <Avatar className='size-10'>
-                        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                        <AvatarFallback>CN</AvatarFallback>
+                     <Avatar className="size-10">
+                          {profile?.avatar_url && <AvatarImage src={profile.avatar_url} />}
                     </Avatar>
                 </div>
                 <div><Textarea value={post} onChange={(e) => setPost(e.target.value)} className='border-none shadow-none w-[45vw] focus:outline-none focus:ring-0' placeholder='What is happening?' /></div>
