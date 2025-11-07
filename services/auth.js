@@ -15,13 +15,14 @@ export const signUpUser = async (email, password) => {
 }
 
 export const signInUser = async (email, password) => {
-    const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-    })
+   const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  })
     if(error) {
         toast.error(error.message)
         return
     }
-    toast.success('Welcome back!')
+    toast.success('Welcome back!') 
+    return { data, error } 
 }

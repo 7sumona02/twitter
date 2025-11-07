@@ -13,6 +13,7 @@ const page = () => {
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
     const [user, setUser] = useState(null)
+    const [isChecking, setIsChecking] = useState(true)
 
     useEffect(() => {
         //check if registered
@@ -29,12 +30,15 @@ const page = () => {
            //check if already has profile
            const {data:profile, error:profileError} = await supabase.from('profiles').select('*').eq('id',user.id).maybeSingle()
            if (profile) {
-            router.replace('/')
+            router.replace('/home')
             return
           } 
+          setIsChecking(false)
         }
         handleAuth()
     },[router])
+
+    if(isChecking) return <div>Checking Profile...</div>
 
     const setupUserProfile = async(e) => {
         e.preventDefault()
@@ -68,7 +72,7 @@ const page = () => {
         }
         toast.success('Profile completed!')
         setTimeout(() => {
-            router.replace('/')
+            router.replace('/home')
         }, 2000)
     }
 

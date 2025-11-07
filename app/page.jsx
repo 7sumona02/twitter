@@ -6,28 +6,29 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { signInUser } from '@/services/auth'
 import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
 const page = () => {
   const [email, setEmail] = useState('')
-      const [password, setPassword] = useState('')
-      const router = useRouter()
+  const [password, setPassword] = useState('')
+  const router = useRouter()
 
-      const signIn = async (e) => {
-        e.preventDefault()
-        if(!email || !password){
-          toast.error('Please fill in all fields')
-          return
-        }
-        const {error} = await signInUser(email, password)
-        if(error){
-          toast.error(error.message)
-          return
-        }
-        toast.success('Welcome back!')
-        setTimeout(() => {
-          router.replace('/auth/callback')
-        },2000)
-      }
+  const signIn = async (e) => {
+    e.preventDefault() 
+    if (!email || !password) {
+      toast.error('Please fill in all fields')
+      return
+    }
+    const { error } = await signInUser(email, password)
+    if (error) {
+      toast.error(error.message)
+      return
+    }
+    toast.success('Welcome back!')
+    setTimeout(() => {
+      router.replace('/auth/callback')
+    }, 2000)
+  }
   return (
     <div className='min-h-screen w-screen flex justify-center items-center'>
       <div className='md:w-sm w-xs space-y-5'>
@@ -40,7 +41,7 @@ const page = () => {
         <div className='text-center'>or</div>
         <form onSubmit={signIn} className='space-y-5'>
           <div><Input value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email' /></div>
-          <div><Input value={password} onChange={(e) => setPassword(e.target.value)}  placeholder='Password' /></div>
+          <div><Input value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password' /></div>
           <Button className='w-full cursor-pointer'>Continue</Button>
           <Button className='w-full cursor-pointer' variant={'outline'}>Forgot Password?</Button>
           <div className='text-sm'>Don't have an account? <Link href='/auth/signup' className='font-semibold cursor-pointer'>Sign up</Link></div>
