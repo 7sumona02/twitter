@@ -1,4 +1,4 @@
-import { Bell, Calendar, CircleEllipsis, Ellipsis, Home, Inbox, Mail, Search, SearchIcon, Settings, ShieldAlertIcon, TwitterIcon, User, Users } from "lucide-react"
+import { Bell, CircleEllipsis, Home, Mail, SearchIcon, TwitterIcon, User, Users } from "lucide-react"
 
 import {
   Sidebar,
@@ -11,8 +11,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { Button } from "./ui/button"
-import { Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "./ui/item"
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
+import Profile from "@/components/Profile"
 
 // Menu items.
 const items = [
@@ -77,29 +76,7 @@ export function AppSidebar() {
                 </SidebarMenuItem>
               ))}
               <Button className="mt-5">Post</Button>
-              <div className="flex w-full max-w-lg flex-col gap-6 mt-5">
-                <Item variant='muted'>
-                  <ItemMedia>
-                    <Avatar className="size-10">
-                      <AvatarImage src="https://github.com/evilrabbit.png" />
-                      <AvatarFallback>ER</AvatarFallback>
-                    </Avatar>
-                  </ItemMedia>
-                  <ItemContent>
-                    <ItemTitle>Evil Rabbit</ItemTitle>
-                    <ItemDescription>Last seen 5 months ago</ItemDescription>
-                  </ItemContent>
-                  <ItemActions>
-                    <Button
-                      size="icon-sm"
-                      variant="ghost"
-                      className="cursor-pointer"
-                    >
-                      <Ellipsis />
-                    </Button>
-                  </ItemActions>
-                </Item>
-              </div>
+              <Profile />
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

@@ -28,13 +28,10 @@ const page = () => {
 
            //check if already has profile
            const {data:profile, error:profileError} = await supabase.from('profiles').select('*').eq('id',user.id).maybeSingle()
-           if(profileError){
-             router.replace('/auth/signup')
-             return
-           }
-           if(profile){
-             router.replace('/')
-           }
+           if (profile) {
+            router.replace('/')
+            return
+          } 
         }
         handleAuth()
     },[router])
@@ -58,7 +55,7 @@ const page = () => {
         const {data:{publicUrl}} = supabase.storage.from('avatars').getPublicUrl(imagePath)
 
         //insert avatar url to profiles table
-        const {error:insertError} = await supabase.from('profiles').insert({
+        const {error:insertError} = await supabase.from('profiles').upsert({
             username,
             email: user.email,
             avatar_url: publicUrl,
@@ -74,6 +71,8 @@ const page = () => {
             router.replace('/')
         }, 2000)
     }
+
+    console.log('Inserted profile for id:', user.id)
 
   return (
     <div className='min-h-screen w-screen flex justify-center items-center'>
