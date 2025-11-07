@@ -34,6 +34,7 @@ const CreatePost = () => {
     }
 
     if (!session) return null
+    if(!profile) return null
     if (loading) return (
     <div className="flex flex-col space-y-3">
       <Skeleton className="h-[125px] w-[250px] rounded-xl" />

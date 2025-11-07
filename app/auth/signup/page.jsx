@@ -4,9 +4,10 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import Link from 'next/link'
 import { signUpUser } from '../../../services/auth'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
+import { supabase } from '../../../lib/supabase-client'
 
 const page = () => {
     const [email, setEmail] = useState('')
@@ -31,6 +32,14 @@ const page = () => {
             router.replace('/auth/callback')
         }, 2000)
     }
+
+    useEffect(() => {
+    supabase.auth.getSession().then(({data:{session}}) => {
+      if(session) {
+        router.replace('/auth/callback')
+      }
+    })
+  },[])
   return (
     <div className='min-h-screen w-screen flex justify-center items-center'>
       <div className='md:w-sm w-xs space-y-5'>

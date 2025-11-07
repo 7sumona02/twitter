@@ -12,6 +12,8 @@ const Profile = () => {
     if(!session) return null  
     console.log('Session:', session)
 
+    if(!profile) return null
+
     if(loading) return (
     <div className="flex w-full max-w-lg flex-col gap-6 mt-5">
       <Skeleton className="h-12 w-12 rounded-full" />
