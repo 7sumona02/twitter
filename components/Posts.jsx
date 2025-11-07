@@ -1,15 +1,17 @@
 'use client'
 import { Bookmark, ChartNoAxesColumnIncreasing, EllipsisIcon, Heart, MessageCircle, Repeat } from "lucide-react"
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
+import { Avatar, AvatarImage } from "./ui/avatar"
 import { useGetTweets } from "../custom-hooks/useTweet"
 import Link from "next/link"
 import moment from "moment"
 
 const Posts = () => {
     const {isLoading,isError,error,data:tweets} = useGetTweets()
+    console.log('tweets:', tweets)
 
     if(isLoading) return <div>Loading...</div>
     if(isError) return error.message
+    console.log('tweets:', tweets)
     return (
         <div className="pb-40">
         {tweets?.map((tweet) => (
@@ -17,7 +19,6 @@ const Posts = () => {
             <div>
                 <Avatar className='size-10'>
                     <AvatarImage src={tweet.profiles.avatar_url} alt="@shadcn" />
-                    <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
             </div>
             <div className="space-y-2 w-full">
@@ -33,14 +34,16 @@ const Posts = () => {
                 </div>
             </div>
             {tweet.content && (
-                <Link href={'/'}>{tweet.content}</Link>
+               <Link href={`/home/post/${tweet.id}`}>
+  {tweet.content}
+</Link>
             )}
             {tweet.image_url && (
-                <div>
+                <Link href={`/home/post/${tweet.id}`}>
                     <div className='w-full h-[50vh] rounded-md overflow-hidden relative'>
                         <img src={tweet.image_url} className='w-full h-full object-cover' />
                     </div>
-                </div>
+                </Link>
             )}
             <div className="flex justify-between items-center py-2">
                 <div className="flex items-center gap-1"><MessageCircle size={20} />2.7k</div>
