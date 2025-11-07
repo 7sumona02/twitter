@@ -46,7 +46,7 @@ const Posts = () => {
                                 </div>
                             </Link>
                         )}
-                        <TweetActions creatorId={tweet.profiles.id} />
+                        <TweetActions creatorId={tweet.profiles.id} tweetId={tweet.id} imagePath={tweet.image_Path} />
                     </div>
                 </div>
             ))}
